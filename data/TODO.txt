@@ -1,0 +1,24 @@
+TODO:
+import pytmx, import maps and map data - DONE
+Player spritesheet being read and animated in-engine, animation system - DONE
+seperate engine into different scripts (read docs) - DONE (import engine, importing, class(es))
+seperate and simplify i.e. lives(livesamount) rather than live(rewrite entire code) - DONE (def)
+cam follow - not done
+create 8 directional movement- not done, get 4 directional done first
+pytmx collison tag system
+convert spirtes into nicer ones
+
+when done:
+practice sprite art and create sheet/assests (da trees)
+show off on twitter
+
+when D-Done:
+Mess with python libraries (maybe)
+custom level editor that can export .tmx files
+show that off on twitter
+after showing on twitter, start working on combat (turn-based)
+dialog, interactions - interactions using entity.type are done but no dialog yet.
+
+After...
+After finishing (%PLACEHOLDER%), time to create a new engine in c++ (c# prehaps?).
+
