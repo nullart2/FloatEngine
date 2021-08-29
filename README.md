@@ -17,13 +17,13 @@ Player Movement
 Basic Enemies
 
 # To Do:
-Import pytmx, import maps and their data in-engine (DONE)
+Import pytmx, import maps and their data in-engine - (DONE)
 
-Player spritesheet being read and animated in-engine, animation system (DONE)
+Player spritesheet being read and animated in-engine, animation system - (DONE)
 
-Seperate engine into different scripts (import engine, importing, class(es)) (DONE)
+Seperate engine into different scripts (import engine, importing, class(es)) - (DONE)
 
-Seperate and simplify i.e. lives(livesamount) rather than live(rewrite entire code), (def) (DONE)
+Seperate and simplify i.e. lives(livesamount) rather than live(rewrite entire code), (def)  - (DONE)
 
 Camera follow - (IN PROGRESS)
 
