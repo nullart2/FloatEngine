@@ -61,7 +61,7 @@ class CameraSystem(System):
             s = e.state
             a = e.animations.animationList[s]
             #True, False == Hortizontally(true), vertically(false)
-            a.draw(screen, e.position.rect.x, e.position.rect.y, e.direction == 'left', False)
+            a.draw(screen, e.position.rect.x + offestX, e.position.rect.y + offestY, e.direction == 'left', False)
 
         #unset clipping rectangle
         screen.set_clip(None)
