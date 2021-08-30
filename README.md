@@ -8,7 +8,10 @@ An Early Version of a Cross-Platform 2D Game Engine.
 Map implementations, Level editor (Native Tiled Editor Support)
 
 Animation System
+
 Entity Component System (Collectables, Enemies, Player)
+
+Custom Camera System (Tracking, Values)
 
 Player Physics
 
