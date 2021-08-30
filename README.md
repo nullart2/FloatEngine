@@ -25,7 +25,7 @@ Seperate engine into different scripts (import engine, importing, class(es)) - (
 
 Seperate and simplify i.e. lives(livesamount) rather than live(rewrite entire code), (def)  - (DONE)
 
-Camera follow - (IN PROGRESS)
+Camera follow - (DONE)
 
 Create 8 directional movement, get 4 directional done first - (IN PROGRESS)
 
