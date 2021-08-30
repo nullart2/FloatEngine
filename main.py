@@ -76,7 +76,7 @@ entities.append(enemy)
 
 #player instantiate
 player = utils.makePlayer(300, 0)
-player.camera = engine.Camera(-400, -300, 1000, 800) 
+player.camera = engine.Camera(-410, -320, 1000, 800) 
 player.camera.setWorldPos(345, 250) #camera fov
 player.camera.trackEntity(player) #camera focused on player
 entities.append(player)
