@@ -32,9 +32,9 @@ Camera System - (DONE)
 
 Heads Up Display (HUD) - (IN PROGRESS)
 
-Create 8 directional movement, get 4 directional done first - (IN PROGRESS)
-
 Scene Transitions, Splash Screen - (IN PROGRESS)
+
+Create 8 directional movement, get 4 directional done first - (IN PROGRESS)
 
 Audio Manager - (NOT DONE)
 
