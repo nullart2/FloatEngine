@@ -4,6 +4,13 @@ An Early Version of a Cross-Platform 2D Game Engine.
 
 ![Logo](https://user-images.githubusercontent.com/37387227/131238962-3c205f3d-ae7a-4d8e-b2ed-a1f4ba2cc321.gif)
 
+# Versions
+
+|Version|Description|
+|---|---|
+|0.0.1|Initial engine iteration. Features a basic Entity Component System.|
+|0.0.2|IN PROGRESS.|
+
 # Features:
 Map implementations, Level editor (Native Tiled Editor Support)
 
@@ -43,4 +50,5 @@ Pytmx collison tag system - (NOT DONE)
 Update Map - (NOT DONE)
 
 Update sprites - (NOT DONE)
+
 
