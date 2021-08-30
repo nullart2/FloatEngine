@@ -8,7 +8,7 @@ An Early Version of a Cross-Platform 2D Game Engine.
 
 |Version|Description|
 |---|---|
-|0.0.1|Initial engine iteration. Features a basic Entity Component System.|
+|0.0.1|Initial engine iteration. Features a basic Entity Component System. OpenGL support via SDL2.|
 |0.0.2|IN PROGRESS.|
 
 # Features:
