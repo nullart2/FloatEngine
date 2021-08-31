@@ -1,5 +1,5 @@
 #Uses Python with SDL2
-#C++ is Not Supported
+#C++/C# is Not Yet Supported
 
 from typing import Text
 import pygame
@@ -13,29 +13,20 @@ pytmx.__dir__()
 #detect if pygame = true
 if pygame:
     print("FloatEngine.Start")
-    print("FloatEngine.Active") 
 
 #detect if engine = true
 if engine:
     print('Engine.OnLoad') 
-
-#draw text
-def drawText(t, x, y):
-    text = font.render(t, True, White)
-    text_rectangle = text.get_rect()
-    text_rectangle.topleft = (x,y)
-    screen.blit(text, text_rectangle)
+    print("FloatEngine.Active") 
 
 #color variables
 Screen_Size = (700,500)
-White = (210,200,201)
 
 #init 
 pygame.init()
 screen = pygame.display.set_mode(Screen_Size)
 pygame.display.set_caption('Float Engine')
 pygame_icon = pygame.image.load('D:\SDL2-Engine/assets/EngineLogo.png')
-font = pygame.font.Font(('D:\SDL2-Engine/fonts/munro.ttf'), 20) 
 world_offset = [0, 0]
 texdata = load_pygame('D:\SDL2-Engine/map_data/world.tmx')
 
@@ -65,10 +56,8 @@ platforms = [
 ]
 
 #coins
-coin_image = pygame.image.load('D:\SDL2-Engine/images/coin_0.png')
 entities.append(utils.makeCoin(100, 200))
 entities.append(utils.makeCoin(200, 270))
-score = 0
 
 #enemies
 enemy = utils.makeEnemy(150, 274)
@@ -79,14 +68,12 @@ player = utils.makePlayer(300, 0)
 player.camera = engine.Camera(-410, -320, 1000, 800) 
 player.camera.setWorldPos(345, 250) #camera fov
 player.camera.trackEntity(player) #camera focused on player
+player.score = engine.Score()
+player.battle = engine.Battle()
 entities.append(player)
 
 #camera system
 cameraSys = engine.CameraSystem()
-
-#health
-lives = 3
-heart_image = pygame.image.load('D:\SDL2-Engine/images/heart.png')
 
 running = True
 while running:
@@ -225,9 +212,9 @@ while running:
             if entity.type == 'collectable':
                 if entity.position.rect.colliderect(player_rect):
                     entities.remove(entity)
-                    score += 1
+                    player.score.score += 1
                     #win if score is 2
-                    if score >= 2:
+                    if player.score.score >= 2:
                         #game_state = 'win'
                         game_state = 'win'
         
@@ -235,12 +222,12 @@ while running:
         for entity in entities:
             if entity.type == 'enemy':
                 if entity.position.rect.colliderect(player_rect):
-                    lives -= 1             
+                    player.battle.lives  -= 1             
                     player.position.rect.x = 300
                     player.position.rect.y = 0
                     player_speed = 0
                     #player death
-                    if lives <= 0:
+                    if player.battle.lives <= 0:
                         #game_state = 'lose'
                         game_state = 'lose'
                   
@@ -267,15 +254,6 @@ while running:
     cameraSys.update(screen, entities, platforms)
 
     if game_state == 'playing':
-
-        #scoreText
-        #screen.blit(coin_image, (620, 18))
-        #drawText(str(score), 660, 22)
-
-        #lives count
-        #for l in range(lives):
-            #screen.blit(heart_image, (10 + (l * 50), 10))
-
 
     #win       
     #if game_state == 'win':

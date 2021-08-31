@@ -1,10 +1,9 @@
 #Uses Python with SDL2
-#C++ is Not Supported
+#C++/C# is Not Yet Supported
 
 import pygame
-
-Dark_Purple = (60,50,120)
-Black = (50,50,50)
+from pygame.draw import rect
+import utils
 
 class System():
     def __init__(self):
@@ -49,12 +48,12 @@ class CameraSystem(System):
 
         #fill camera background when there is no map
         if MakeMap == False:
-            screen.fill(Black)
+            screen.fill(utils.Black)
 
         #render platforms
         for p in platforms:
             newPosRect = pygame.Rect(p.x + offestX, p.y + offestY, p.w, p.h)
-            pygame.draw.rect(screen, Dark_Purple, newPosRect)
+            pygame.draw.rect(screen, utils.Dark_Purple, newPosRect)
 
         #calling entities
         for e in entities:
@@ -62,6 +61,16 @@ class CameraSystem(System):
             a = e.animations.animationList[s]
             #True, False == Hortizontally(true), vertically(false)
             a.draw(screen, e.position.rect.x + offestX, e.position.rect.y + offestY, e.direction == 'left', False)
+
+        #player ui (hud)
+        if entity.score is not None:
+            screen.blit(utils.coin_image, (10, 10))
+            utils.drawText(screen, str(entity.score.score), 50, 14)
+
+        #lives count
+        if entity.battle is not None:        
+            for l in range(entity.battle.lives):
+                screen.blit(utils.heart_image, (80 + (l * 50), 2))
 
         #unset clipping rectangle
         screen.set_clip(None)
@@ -112,6 +121,14 @@ class MakeMap():
                 y_pixel = tile[1] * 5 + world_offset[1] #FILL Area on Y-Axis
                 screen.blit( tile [2], (x_pixel, y_pixel))
 
+class Score():
+    def __init__(self):
+        self.score = 0
+
+class Battle():
+    def __init__(self):
+        self.lives = 3
+
 class Entity():
     def __init__(self):
         self.state = 'idle'       
@@ -120,4 +137,6 @@ class Entity():
         self.animations = Animations()
         self.direction = 'right'
         self.camera = None
+        self.score = None
+        self.battle = None
 

@@ -1,6 +1,28 @@
+#Uses Python with SDL2
+#C++/C# is Not Yet Supported
+
 import pygame
 import engine
 
+#colors
+Dark_Purple = (60,50,120)
+Black = (50,50,50)
+White = (210,200,201)
+
+#font(s)
+pygame.font.init()
+font = pygame.font.Font(('D:\SDL2-Engine/fonts/munro.ttf'), 22) 
+
+#images
+coin_image = pygame.image.load('D:\SDL2-Engine/images/coin_0.png')
+heart_image = pygame.image.load('D:\SDL2-Engine/images/heart.png')
+
+#draw text
+def drawText(screen, t, x, y):
+    text = font.render(t, True, White)
+    text_rectangle = text.get_rect()
+    text_rectangle.topleft = (x,y)
+    screen.blit(text, text_rectangle)
 
 def makeCoin(x, y):
     entity = engine.Entity()
