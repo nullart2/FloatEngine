@@ -10,11 +10,11 @@ class System():
         pass
     def check(self, entity):
         return True
-    def update(self, screen, entities, platforms):
-        for entity in entities:
+    def update(self, screen, world):
+        for entity in world.entities:
             if self.check(entity):
-                self.updateEntity(screen, entity, entities, platforms)
-    def updateEntity(self, screen, entity, platforms):
+                self.updateEntity(screen, entity, world)
+    def updateEntity(self, screen, entity, world):
         pass
 
 class CameraSystem(System):
@@ -22,7 +22,7 @@ class CameraSystem(System):
         super().__init__()
     def check(self, entity):
         return entity.camera is not None
-    def updateEntity(self, screen, entity, entities, platforms):
+    def updateEntity(self, screen, entity, world):
 
         #set clipping rectangle
         cameraRect = entity.camera.rect
@@ -51,12 +51,12 @@ class CameraSystem(System):
             screen.fill(utils.Black)
 
         #render platforms
-        for p in platforms:
+        for p in world.platforms:
             newPosRect = pygame.Rect(p.x + offestX, p.y + offestY, p.w, p.h)
             pygame.draw.rect(screen, utils.Dark_Purple, newPosRect)
 
         #calling entities
-        for e in entities:
+        for e in world.entities:
             s = e.state
             a = e.animations.animationList[s]
             #True, False == Hortizontally(true), vertically(false)

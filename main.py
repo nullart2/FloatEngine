@@ -4,6 +4,7 @@
 from typing import Text
 import pygame
 import engine
+import scene
 import utils
 from pytmx.util_pygame import load_pygame
 import pytmx
@@ -48,33 +49,59 @@ pygame.display.set_icon(pygame_icon)
 player_speed = 0
 player_acceleration = 0.3
 
-#platforms
-platforms = [
-    pygame.Rect(100,300,400,50),
-    pygame.Rect(450,250,50,50),
-    pygame.Rect(100,250,50,50)
-]
-
 #coins
-entities.append(utils.makeCoin(100, 200))
-entities.append(utils.makeCoin(200, 270))
+coin1 = (utils.makeCoin(100, 200))
+coin2 = (utils.makeCoin(200, 270))
 
 #enemies
 enemy = utils.makeEnemy(150, 274)
-entities.append(enemy)
 
-#player instantiate
+#instantiate player
 player = utils.makePlayer(300, 0)
 player.camera = engine.Camera(-410, -320, 1000, 800) 
 player.camera.setWorldPos(345, 250) #camera fov
 player.camera.trackEntity(player) #camera focused on player
 player.score = engine.Score()
 player.battle = engine.Battle()
-entities.append(player)
 
 #camera system
 cameraSys = engine.CameraSystem()
 
+#win/lose condition
+def lostLevel():
+    return False
+def wonLevel():
+    return False
+
+#scenes
+scene1 = scene.Scene(
+    platforms = [
+        pygame.Rect(100,300,400,50),
+        pygame.Rect(450,250,50,50),
+        pygame.Rect(100,250,50,50)
+    ],
+    entities = [
+        player, enemy, coin1, coin2
+    ],
+
+    winFunc = wonLevel,
+    loseFunc = wonLevel
+)
+
+scene2 = scene.Scene(
+    platforms = [
+        pygame.Rect(100,300,400,50),
+    ],
+    entities = [
+        player, enemy
+    ]
+)
+
+#set scene
+scene = [scene1, scene2]
+world = scene1
+
+#running? then start loop
 running = True
 while running:
 
@@ -93,12 +120,9 @@ while running:
         engine.MakeMap == False
 
     if game_state == 'playing':
-
-        new_player_x = player.position.rect.x
-        new_player_y = player.position.rect.y
         
         #update animations
-        for entity in entities:
+        for entity in world.entities:
             entity.animations.animationList[entity.state].update()
 
         #input  
@@ -174,7 +198,7 @@ while running:
         x_collison = False
 
         #collison Handler X
-        for p in platforms:
+        for p in world.platforms:
             if p.colliderect(new_player_rect):
                 x_collison = True
                 break
@@ -191,7 +215,7 @@ while running:
         player_on_ground = False
 
         #collison Handler Y
-        for p in platforms:
+        for p in world.platforms:
             if p.colliderect(new_player_rect):
                 y_collison = True
                 player_speed = 0
@@ -207,19 +231,19 @@ while running:
         
         #collection system
         player_rect = pygame.Rect(player.position.rect.x, player.position.rect.y, player.position.rect.width, player.position.rect.height)
-
-        for entity in entities:
+        for entity in world.entities:
             if entity.type == 'collectable':
                 if entity.position.rect.colliderect(player_rect):
-                    entities.remove(entity)
+                    world.entities.remove(entity)
                     player.score.score += 1
                     #win if score is 2
                     if player.score.score >= 2:
                         #game_state = 'win'
-                        game_state = 'win'
+                        #test scene system 
+                        world = scene2 
         
         #enemy system
-        for entity in entities:
+        for entity in world.entities:
             if entity.type == 'enemy':
                 if entity.position.rect.colliderect(player_rect):
                     player.battle.lives  -= 1             
@@ -229,11 +253,13 @@ while running:
                     #player death
                     if player.battle.lives <= 0:
                         #game_state = 'lose'
-                        game_state = 'lose'
+                        #test scene system 
+                        player.battle.lives += 3
+                        world = scene1 
                   
         
 
-        #out of bounds collider, use enemy as base
+    #out of bounds collider, use enemy as base
 
     #check quit
     for event in pygame.event.get():
@@ -251,7 +277,7 @@ while running:
     #background
     #screen.fill(Black)
 
-    cameraSys.update(screen, entities, platforms)
+    cameraSys.update(screen, world)
 
     if game_state == 'playing':
 
