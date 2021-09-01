@@ -47,6 +47,8 @@ Create 8 directional movement, get 4 directional done first - (IN PROGRESS)
 
 Audio Manager - (NOT DONE)
 
+Vulkan Rendering Support - (NOT DONE)
+
 Pytmx collison tag system - (NOT DONE)
 
 Update Map - (NOT DONE)
