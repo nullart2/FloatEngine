@@ -49,7 +49,7 @@ Audio Manager - (NOT DONE)
 
 Pytmx collison tag system - (NOT DONE)
 
-Controller Support - (NOT DONE)
+Improved Input System/Controller Support - (NOT DONE)
 
 Update Map - (NOT DONE)
 
