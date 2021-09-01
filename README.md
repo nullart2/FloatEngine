@@ -41,6 +41,8 @@ Camera System - (DONE)
 
 Simple Heads Up Display (HUD) - (DONE)
 
+Levels - (DONE)
+
 Scene Transitions, Splash Screen - (IN PROGRESS)
 
 Create 8 directional movement, get 4 directional done first - (IN PROGRESS)
