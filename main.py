@@ -4,7 +4,7 @@
 from typing import Text
 import pygame
 import engine
-import scene
+import level
 import utils
 from pytmx.util_pygame import load_pygame
 import pytmx
@@ -67,14 +67,29 @@ player.battle = engine.Battle()
 #camera system
 cameraSys = engine.CameraSystem()
 
-#win/lose condition
-def lostLevel():
-    return False
-def wonLevel():
-    return False
+#win/lose conditions:
+
+def lostLevel(level):
+#level is not lost if there are lives left
+    for entity in level.entities:
+        if entity.type == 'player':
+            if entity.battle is not None:
+                if entity.battle.lives > 0:
+                    return False
+#lose if no more players/player lives
+    return True
+
+#win if no more collectables left
+def wonLevel(level):
+    for entity in level.entities:
+        if entity.type == 'collectable':
+        #if there is still a collectable then player has not won yet
+                return False
+    #won the level
+    return True
 
 #scenes
-scene1 = scene.Scene(
+scene1 = level.Level(
     platforms = [
         pygame.Rect(100,300,400,50),
         pygame.Rect(450,250,50,50),
@@ -83,18 +98,21 @@ scene1 = scene.Scene(
     entities = [
         player, enemy, coin1, coin2
     ],
-
+    #texdata1 here
     winFunc = wonLevel,
-    loseFunc = wonLevel
+    loseFunc = lostLevel 
 )
 
-scene2 = scene.Scene(
+scene2 = level.Level(
     platforms = [
         pygame.Rect(100,300,400,50),
     ],
     entities = [
         player, enemy
-    ]
+    ],
+    #texdata2 here
+    winFunc = wonLevel,
+    loseFunc = lostLevel 
 )
 
 #set scene
@@ -237,10 +255,10 @@ while running:
                     world.entities.remove(entity)
                     player.score.score += 1
                     #win if score is 2
-                    if player.score.score >= 2:
+                    #if player.score.score >= 2:
                         #game_state = 'win'
-                        #test scene system 
-                        world = scene2 
+                        #test level system 
+                        #world = level2 
         
         #enemy system
         for entity in world.entities:
@@ -251,12 +269,15 @@ while running:
                     player.position.rect.y = 0
                     player_speed = 0
                     #player death
-                    if player.battle.lives <= 0:
+                    #if player.battle.lives <= 0:
                         #game_state = 'lose'
-                        #test scene system 
-                        player.battle.lives += 3
-                        world = scene1 
-                  
+                        #test level system:
+                            #player.battle.lives += 3
+                            #world = level1 
+        if world.isWon():
+            game_state = 'win'
+        if world.isLost():
+            game_state = 'lose'
         
 
     #out of bounds collider, use enemy as base
@@ -281,17 +302,8 @@ while running:
 
     if game_state == 'playing':
 
-    #win       
-    #if game_state == 'win':
-        #drawText('You Win!', 315 , 220)
-    #lose
-    #if game_state == 'lose':
-        #drawText('You Lose!', 315 , 220)
-
     #screen
         pygame.display.flip()
-
-
 
 
 #---

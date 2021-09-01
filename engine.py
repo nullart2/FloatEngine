@@ -120,6 +120,7 @@ class MakeMap():
                 x_pixel = tile[0] * 8 + world_offset[0] #FILL Area on X-Axis
                 y_pixel = tile[1] * 5 + world_offset[1] #FILL Area on Y-Axis
                 screen.blit( tile [2], (x_pixel, y_pixel))
+                #note: try the collisions with-in level editor
 
 class Score():
     def __init__(self):
