@@ -24,6 +24,8 @@ Player Physics
 
 Player Movement
 
+Simple Player GUI
+
 Basic Enemies
 
 # To Do:
@@ -37,7 +39,7 @@ Seperate and simplify i.e. lives(livesamount) rather than live(rewrite entire co
 
 Camera System - (DONE)
 
-Heads Up Display (HUD) - (IN PROGRESS)
+Simple Heads Up Display (HUD) - (DONE)
 
 Scene Transitions, Splash Screen - (IN PROGRESS)
 
