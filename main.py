@@ -152,6 +152,9 @@ while running:
         new_player_x = player.position.rect.x
         new_player_y = player.position.rect.y
 
+        #call scene manager
+        if sceneManager.isEmpty():
+            running = False
         sceneManager.input()
         sceneManager.update()
         sceneManager.draw()
