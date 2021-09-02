@@ -1,3 +1,6 @@
+#Uses Python with SDL2
+#C++/C# is Not Yet Supported
+
 class Level:
     #store functions
     def __init__(self, platforms = None, entities = None, winFunc = None, loseFunc = None):

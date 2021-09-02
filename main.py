@@ -4,8 +4,9 @@
 from typing import Text
 import pygame
 import engine
-import level
 import utils
+import level
+import scene
 from pytmx.util_pygame import load_pygame
 import pytmx
 pytmx.__file__
@@ -116,7 +117,11 @@ scene2 = level.Level(
 )
 
 #set scene
-scene = [scene1, scene2]
+sceneManager = scene.SceneManager()
+mainMenu = scene.MainMenuScene()
+sceneManager.push(mainMenu)
+
+#set world
 world = scene1
 
 #running? then start loop
@@ -141,12 +146,16 @@ while running:
         
         #update animations
         for entity in world.entities:
-            entity.animations.animationList[entity.state].update()
+            entity.animations.animationList[entity.state].update()  
 
         #input  
         new_player_x = player.position.rect.x
         new_player_y = player.position.rect.y
 
+        sceneManager.input()
+        sceneManager.update()
+        sceneManager.draw()
+        
         #left
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:

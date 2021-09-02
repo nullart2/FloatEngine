@@ -21,4 +21,4 @@ dialog, interactions - interactions using entity.type are done but no dialog yet
 
 After...
 After finishing (%PLACEHOLDER%), time to create a new engine in c++ (c# prehaps?).
-
+Yes, XNA, FNA, MONOGAME: https://www.youtube.com/watch?v=Ve-ZdOYKV8Q&list=PL3wErD7ZIp_DtsTKoouVCxu81UQkI9VZL&index=1&ab_channel=MichaelHicks
