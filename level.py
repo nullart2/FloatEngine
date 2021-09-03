@@ -3,8 +3,9 @@
 
 class Level:
     #store functions
-    def __init__(self, platforms = None, entities = None, winFunc = None, loseFunc = None):
+    def __init__(self, platforms = None, entities = None, winFunc = None, loseFunc = None, maps = None,):
         self.platforms = platforms
+        self.maps = maps
         self.entities = entities
         self.winFunc = winFunc
         self.loseFunc = loseFunc

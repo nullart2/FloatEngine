@@ -43,8 +43,8 @@ class CameraSystem(System):
             entity.camera.worldY = (currentY * 0.90) + (targetY * 0.02)
 
         #calculate offsets
-        offestX = cameraRect.x + cameraRect.w/2 - entity.camera.worldX
-        offestY = cameraRect.y + cameraRect.h/2 - entity.camera.worldY
+        offsetX = cameraRect.x + cameraRect.w/2 - entity.camera.worldX
+        offsetY = cameraRect.y + cameraRect.h/2 - entity.camera.worldY
 
         #fill camera background when there is no map
         if MakeMap == False:
@@ -52,7 +52,7 @@ class CameraSystem(System):
 
         #render platforms
         for p in world.platforms:
-            newPosRect = pygame.Rect(p.x + offestX, p.y + offestY, p.w, p.h)
+            newPosRect = pygame.Rect(p.x + offsetX, p.y + offsetY, p.w, p.h)
             pygame.draw.rect(screen, utils.Dark_Purple, newPosRect)
 
         #calling entities
@@ -60,7 +60,7 @@ class CameraSystem(System):
             s = e.state
             a = e.animations.animationList[s]
             #True, False == Hortizontally(true), vertically(false)
-            a.draw(screen, e.position.rect.x + offestX, e.position.rect.y + offestY, e.direction == 'left', False)
+            a.draw(screen, e.position.rect.x + offsetX, e.position.rect.y + offsetY, e.direction == 'left', False)
 
         #player ui (hud)
         if entity.score is not None:
@@ -114,13 +114,13 @@ class Animations():
         self.animationList[state] = animation
 
 class MakeMap():
-    def blit_all_tiles (screen, texdata, world_offset):
-        for layer in texdata:
+    def blit_all_tiles (screen, mapData, world_offset):
+        for layer in mapData:
             for tile in layer.tiles():
                 x_pixel = tile[0] * 8 + world_offset[0] #FILL Area on X-Axis
                 y_pixel = tile[1] * 5 + world_offset[1] #FILL Area on Y-Axis
                 screen.blit( tile [2], (x_pixel, y_pixel))
-                #note: try the collisions with-in level editor
+                #note: try the collisions with-in level editor        
 
 class Score():
     def __init__(self):

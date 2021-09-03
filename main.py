@@ -30,7 +30,9 @@ screen = pygame.display.set_mode(Screen_Size)
 pygame.display.set_caption('Float Engine')
 pygame_icon = pygame.image.load('D:\SDL2-Engine/assets/EngineLogo.png')
 world_offset = [0, 0]
-texdata = load_pygame('D:\SDL2-Engine/map_data/world.tmx')
+texData = load_pygame('D:\SDL2-Engine/map_data/world.tmx')
+texData2 = load_pygame('D:\SDL2-Engine/map_data/world2.tmx')
+mapData = [texData, texData2]
 
 #Fullscreen
 fullscreen = True
@@ -69,7 +71,7 @@ player.battle = engine.Battle()
 cameraSys = engine.CameraSystem()
 
 #win/lose conditions:
-
+###
 def lostLevel(level):
 #level is not lost if there are lives left
     for entity in level.entities:
@@ -79,6 +81,7 @@ def lostLevel(level):
                     return False
 #lose if no more players/player lives
     return True
+###
 
 #win if no more collectables left
 def wonLevel(level):
@@ -99,9 +102,8 @@ scene1 = level.Level(
     entities = [
         player, enemy, coin1, coin2
     ],
-    #texdata1 here
     winFunc = wonLevel,
-    loseFunc = lostLevel 
+    loseFunc = lostLevel, 
 )
 
 scene2 = level.Level(
@@ -111,15 +113,20 @@ scene2 = level.Level(
     entities = [
         player, enemy
     ],
-    #texdata2 here
     winFunc = wonLevel,
-    loseFunc = lostLevel 
+    loseFunc = lostLevel, 
 )
 
 #set scene
 sceneManager = scene.SceneManager()
 mainMenu = scene.MainMenuScene()
 sceneManager.push(mainMenu)
+
+#setting map
+if scene1:
+    map = 0
+else:
+    map = 1
 
 #set world
 world = scene1
@@ -136,10 +143,10 @@ while running:
     pygame.display.update()
 
     #update map data
-    engine.MakeMap.blit_all_tiles(screen, texdata, world_offset)
+    engine.MakeMap.blit_all_tiles(screen, mapData[map], world_offset)
 
     #if no map data
-    if texdata == None:
+    if mapData == None:
         engine.MakeMap == False
 
     if game_state == 'playing':
