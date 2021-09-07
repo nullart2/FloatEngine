@@ -4,17 +4,18 @@
 import pygame
 from pygame.draw import rect
 import utils
+import globals
 
 class System():
     def __init__(self):
         pass
     def check(self, entity):
         return True
-    def update(self, screen, world):
-        for entity in world.entities:
+    def update(self, screen):
+        for entity in globals.world.entities:
             if self.check(entity):
-                self.updateEntity(screen, entity, world)
-    def updateEntity(self, screen, entity, world):
+                self.updateEntity(screen, entity)
+    def updateEntity(self, screen, entity):
         pass
 
 class CameraSystem(System):
@@ -22,7 +23,7 @@ class CameraSystem(System):
         super().__init__()
     def check(self, entity):
         return entity.camera is not None
-    def updateEntity(self, screen, entity, world):
+    def updateEntity(self, screen, entity):
 
         #set clipping rectangle
         cameraRect = entity.camera.rect
@@ -51,12 +52,12 @@ class CameraSystem(System):
             screen.fill(utils.Black)
 
         #render platforms
-        for p in world.platforms:
+        for p in globals.world.platforms:
             newPosRect = pygame.Rect(p.x + offsetX, p.y + offsetY, p.w, p.h)
-            pygame.draw.rect(screen, utils.Dark_Purple, newPosRect)
+            pygame.draw.rect(screen, globals.Dark_Purple, newPosRect)
 
         #calling entities
-        for e in world.entities:
+        for e in globals.world.entities:
             s = e.state
             a = e.animations.animationList[s]
             #True, False == Hortizontally(true), vertically(false)
@@ -140,4 +141,3 @@ class Entity():
         self.camera = None
         self.score = None
         self.battle = None
-

@@ -4,6 +4,7 @@
 from typing import Text
 import pygame
 import engine
+import globals
 import utils
 import level
 import scene
@@ -30,17 +31,15 @@ screen = pygame.display.set_mode(Screen_Size)
 pygame.display.set_caption('Float Engine')
 pygame_icon = pygame.image.load('D:\SDL2-Engine/assets/EngineLogo.png')
 world_offset = [0, 0]
-texData = load_pygame('D:\SDL2-Engine/map_data/world.tmx')
+texData1 = load_pygame('D:\SDL2-Engine/map_data/world.tmx')
 texData2 = load_pygame('D:\SDL2-Engine/map_data/world2.tmx')
-mapData = [texData, texData2]
+mapData = [texData1, texData2]
 
 #Fullscreen
 fullscreen = True
 
 #game states --> playing/win/lose
 game_state = 'playing'
-
-entities = []
 
 #VSync
 clock = pygame.time.Clock()
@@ -71,7 +70,7 @@ player.battle = engine.Battle()
 cameraSys = engine.CameraSystem()
 
 #win/lose conditions:
-###
+##########
 def lostLevel(level):
 #level is not lost if there are lives left
     for entity in level.entities:
@@ -81,7 +80,6 @@ def lostLevel(level):
                     return False
 #lose if no more players/player lives
     return True
-###
 
 #win if no more collectables left
 def wonLevel(level):
@@ -91,9 +89,10 @@ def wonLevel(level):
                 return False
     #won the level
     return True
+############
 
 #scenes
-scene1 = level.Level(
+globals.levels[1] = level.Level(
     platforms = [
         pygame.Rect(100,300,400,50),
         pygame.Rect(450,250,50,50),
@@ -106,7 +105,7 @@ scene1 = level.Level(
     loseFunc = lostLevel, 
 )
 
-scene2 = level.Level(
+globals.levels[2] = level.Level(
     platforms = [
         pygame.Rect(100,300,400,50),
     ],
@@ -122,14 +121,14 @@ sceneManager = scene.SceneManager()
 mainMenu = scene.MainMenuScene()
 sceneManager.push(mainMenu)
 
-#setting map
-if scene1:
+#set map
+if globals.levels[1]:
     map = 0
 else:
     map = 1
 
 #set world
-world = scene1
+globals.world = globals.levels[1]
 
 #running? then start loop
 running = True
@@ -146,13 +145,13 @@ while running:
     engine.MakeMap.blit_all_tiles(screen, mapData[map], world_offset)
 
     #if no map data
-    if mapData == None:
-        engine.MakeMap == False
+    if globals.world is None:
+        DefaultBG = True
 
     if game_state == 'playing':
         
         #update animations
-        for entity in world.entities:
+        for entity in globals.world.entities:
             entity.animations.animationList[entity.state].update()  
 
         #input  
@@ -164,7 +163,7 @@ while running:
             running = False
         sceneManager.input()
         sceneManager.update()
-        sceneManager.draw()
+        sceneManager.draw(screen)
         
         #left
         keys = pygame.key.get_pressed()
@@ -235,7 +234,7 @@ while running:
         x_collison = False
 
         #collison Handler X
-        for p in world.platforms:
+        for p in globals.world.platforms:
             if p.colliderect(new_player_rect):
                 x_collison = True
                 break
@@ -252,7 +251,7 @@ while running:
         player_on_ground = False
 
         #collison Handler Y
-        for p in world.platforms:
+        for p in globals.world.platforms:
             if p.colliderect(new_player_rect):
                 y_collison = True
                 player_speed = 0
@@ -268,10 +267,10 @@ while running:
         
         #collection system
         player_rect = pygame.Rect(player.position.rect.x, player.position.rect.y, player.position.rect.width, player.position.rect.height)
-        for entity in world.entities:
+        for entity in globals.world.entities:
             if entity.type == 'collectable':
                 if entity.position.rect.colliderect(player_rect):
-                    world.entities.remove(entity)
+                    globals.world.entities.remove(entity)
                     player.score.score += 1
                     #win if score is 2
                     #if player.score.score >= 2:
@@ -280,7 +279,7 @@ while running:
                         #world = level2 
         
         #enemy system
-        for entity in world.entities:
+        for entity in globals.world.entities:
             if entity.type == 'enemy':
                 if entity.position.rect.colliderect(player_rect):
                     player.battle.lives  -= 1             
@@ -293,9 +292,9 @@ while running:
                         #test level system:
                             #player.battle.lives += 3
                             #world = level1 
-        if world.isWon():
+        if globals.world.isWon():
             game_state = 'win'
-        if world.isLost():
+        if globals.world.isLost():
             game_state = 'lose'
         
 
@@ -309,21 +308,8 @@ while running:
 #---
 #UPDATE  
 #---
+    #fps = 60
     clock.tick(60)
-
-#---
-#RENDER/DRAW
-#---
-    #background
-    #screen.fill(Black)
-
-    cameraSys.update(screen, world)
-
-    if game_state == 'playing':
-
-    #screen
-        pygame.display.flip()
-
 
 #---
 #EXIT

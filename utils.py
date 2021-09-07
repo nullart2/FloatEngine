@@ -3,15 +3,13 @@
 
 import pygame
 import engine
-
-#colors
-Dark_Purple = (60,50,120)
-Black = (50,50,50)
-White = (210,200,201)
+import globals
 
 #font(s)
 pygame.font.init()
 font = pygame.font.Font(('D:\SDL2-Engine/fonts/munro.ttf'), 22) 
+largeFont = pygame.font.Font(('D:\SDL2-Engine/fonts/munro.ttf'), 50) 
+smallFont = pygame.font.Font(('D:\SDL2-Engine/fonts/munro.ttf'), 15) 
 
 #images
 coin_image = pygame.image.load('D:\SDL2-Engine/images/coin_0.png')
@@ -19,7 +17,19 @@ heart_image = pygame.image.load('D:\SDL2-Engine/images/heart.png')
 
 #draw text
 def drawText(screen, t, x, y):
-    text = font.render(t, True, White)
+    text = font.render(t, True, globals.White)
+    text_rectangle = text.get_rect()
+    text_rectangle.topleft = (x,y)
+    screen.blit(text, text_rectangle)
+
+def drawLargeText(screen, t, x, y):
+    text = largeFont.render(t, True, globals.White)
+    text_rectangle = text.get_rect()
+    text_rectangle.topleft = (x,y)
+    screen.blit(text, text_rectangle)
+
+def drawSmallText(screen, t, x, y):
+    text = smallFont.render(t, True, globals.White)
     text_rectangle = text.get_rect()
     text_rectangle.topleft = (x,y)
     screen.blit(text, text_rectangle)
