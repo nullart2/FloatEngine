@@ -48,7 +48,7 @@ Scene Transitions, Splash Screen - (DONE)
 
 Improved Input System/Controller Support - (IN PROGRESS)
 
-Create Eight directional movement, get Four directional done first - (IN PROGRESS)
+Create EIGHT directional movement, get FOUR directional done first - (IN PROGRESS)
 
 Audio Manager - (NOT DONE)
 
