@@ -9,7 +9,8 @@ An Early Version of a Cross-Platform 2D Game Engine.
 |Version|Description|
 |---|---|
 |0.0.1|Initial engine iteration. Features a basic Entity Component System. OpenGL support via SDL2.|
-|0.0.2|IN PROGRESS.|
+|0.0.2|SceneManager, Loading System, Player HUD, Improved Map Importing.|
+|0.0.3|IN-PROGRESS.|
 
 # Features:
 Map implementations, Level editor (Native Tiled Editor Support)
