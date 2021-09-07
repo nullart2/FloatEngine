@@ -10,7 +10,7 @@ An Early Version of a Cross-Platform 2D Game Engine.
 |---|---|
 |0.0.1|Initial engine iteration. Features a basic Entity Component System. OpenGL support via SDL2.|
 |0.0.2|SceneManager, Loading System, Player HUD, Improved Map Importing.|
-|0.0.3|IN-PROGRESS.|
+|0.0.3|IN PROGRESS.|
 
 # Features:
 Map implementations, Level editor (Native Tiled Editor Support)
@@ -44,7 +44,9 @@ Simple Heads Up Display (HUD) - (DONE)
 
 Levels - (DONE)
 
-Scene Transitions, Splash Screen - (IN PROGRESS)
+Scene Transitions, Splash Screen - (DONE)
+
+Improved Input System/Controller Support - (IN PROGRESS)
 
 Create 8 directional movement, get 4 directional done first - (IN PROGRESS)
 
@@ -52,7 +54,9 @@ Audio Manager - (NOT DONE)
 
 Pytmx collison tag system - (NOT DONE)
 
-Improved Input System/Controller Support - (NOT DONE)
+Basic Game Editor - (NOT DONE)
+
+Basic Game In .exe Format for Disruption - (NOT DONE)
 
 Update Map - (NOT DONE)
 
