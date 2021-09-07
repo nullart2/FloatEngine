@@ -54,7 +54,7 @@ Audio Manager - (NOT DONE)
 
 Pytmx collison tag system - (NOT DONE)
 
-Basic Game Editor - (NOT DONE)
+Basic Game Editor, ImGUI - (NOT DONE)
 
 Basic Game In .exe Format for Distribution - (NOT DONE)
 
