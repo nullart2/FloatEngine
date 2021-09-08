@@ -56,7 +56,7 @@ Pytmx collison tag system - (NOT DONE)
 
 Basic Game Editor, ImGUI - (NOT DONE)
 
-Basic Game In .exe Format for Distribution - (NOT DONE)
+Basic Game In .exe Format for Distribution, Packages, Installer - (NOT DONE)
 
 Update Map - (NOT DONE)
 
