@@ -32,7 +32,6 @@ Basic Enemies
 # Screenshots:
 ![Capture4](https://user-images.githubusercontent.com/37387227/132709953-4d11339e-8a79-41f1-b8b6-cc2662cc0db9.PNG)
 ![Capture](https://user-images.githubusercontent.com/37387227/132709966-4414863f-0a6a-4176-a79a-66597cc8ac83.PNG)
-![Capture2](https://user-images.githubusercontent.com/37387227/132709979-9f030f4f-ff4a-4f45-b9cf-fa5bb62b8809.PNG)
 ![Capture3](https://user-images.githubusercontent.com/37387227/132709984-9ea601ee-b27d-4911-b41d-eb1ae0fa3009.PNG)
 
 # To Do:
