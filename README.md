@@ -1,11 +1,7 @@
 # FloatEngine
 
 An Early Version of a Cross-Platform 2D Game Engine.
-
-# Screenshots:
-![Capture4](https://user-images.githubusercontent.com/37387227/132709953-4d11339e-8a79-41f1-b8b6-cc2662cc0db9.PNG)
-![Capture](https://user-images.githubusercontent.com/37387227/132709966-4414863f-0a6a-4176-a79a-66597cc8ac83.PNG)
-![Capture3](https://user-images.githubusercontent.com/37387227/132709984-9ea601ee-b27d-4911-b41d-eb1ae0fa3009.PNG)
+![Logo](https://user-images.githubusercontent.com/37387227/132724287-214a5ff8-6ee0-4c1f-b63c-2e1f8a26414c.gif)
 
 # Versions
 
@@ -31,6 +27,11 @@ Player Movement
 Simple Player GUI
 
 Basic Enemies
+
+# Screenshots:
+![Capture4](https://user-images.githubusercontent.com/37387227/132709953-4d11339e-8a79-41f1-b8b6-cc2662cc0db9.PNG)
+![Capture](https://user-images.githubusercontent.com/37387227/132709966-4414863f-0a6a-4176-a79a-66597cc8ac83.PNG)
+![Capture3](https://user-images.githubusercontent.com/37387227/132709984-9ea601ee-b27d-4911-b41d-eb1ae0fa3009.PNG)
 
 # To Do:
 Import pytmx, import maps and their data in-engine - (DONE)
